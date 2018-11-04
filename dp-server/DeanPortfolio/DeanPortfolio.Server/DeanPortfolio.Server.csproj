@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>38ec33a6-5720-4a39-bf13-0b8f7c696b0d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +11,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeanPortfolio.Server.Routing\DeanPortfolio.Server.Routing.csproj" />
   </ItemGroup>
 
 </Project>
