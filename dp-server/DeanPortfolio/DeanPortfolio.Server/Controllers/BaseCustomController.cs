@@ -17,9 +17,8 @@ namespace DeanPortfolio.Server.Controllers
         [HttpGet("{name}")]
         public virtual ActionResult<string> Get(string name, [FromBody]string jsonData)
         {
-            string actionName;
-            var route = _router.GetRoute(_ctrlName, Request.Method, out actionName);
-            var dataToken = route.ValidateRequestQuery(actionName, jsonData);
+            var route = _router.GetRoute(_ctrlName, Request.Method, out string actionName);
+            var dataToken = route.ValidateRequestQuery(actionName, jsonData, name);
             var execRes = route.ExecuteRequest(actionName, dataToken);
             // Return current account balance
             return "Blat";
@@ -28,9 +27,8 @@ namespace DeanPortfolio.Server.Controllers
         [HttpPost("{name}")]
         public void Post(string name, [FromBody] string jsonData)
         {
-            string actionName;
-            var route = _router.GetRoute(_ctrlName, Request.Method, out actionName);
-            var dataToken = route.ValidateRequestQuery(actionName, jsonData);
+            var route = _router.GetRoute(_ctrlName, Request.Method, out string actionName);
+            var dataToken = route.ValidateRequestQuery(actionName, jsonData, name);
             var execRes = route.ExecuteRequest(actionName, dataToken);
             // Transfer           
         }

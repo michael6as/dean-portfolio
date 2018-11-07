@@ -5,11 +5,13 @@ namespace DeanPortfolio.Server.Routing
 {
     public class RouteContainer
     {
-        public IMailHandler MailHandler { get; set; }
+        public IMailHandler MailHandler { get; private set; }
+        public string RouteMessage { get; private set; }
 
-        public RouteContainer(IMailHandler handler)
+        public RouteContainer(IMailHandler handler, string routeMsg)
         {
-            MailHandler = handler;            
+            MailHandler = handler;
+            RouteMessage = routeMsg;
         }
     }
 }

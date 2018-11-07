@@ -2,6 +2,6 @@
 {
     public class ExecutionResult
     {
-        
+        public bool Succeed { get; private set; }
     }
 }

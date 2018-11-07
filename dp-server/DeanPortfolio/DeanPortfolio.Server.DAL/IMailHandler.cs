@@ -1,8 +1,9 @@
-﻿namespace DeanPortfolio.Server.DAL
+﻿using DeanPortfolio.Server.Core;
+
+namespace DeanPortfolio.Server.DAL
 {
     public interface IMailHandler
     {
-        void InitMailSettings();
-        void SendMail(string message, string data);
+        void SendMail(string message, ExecutionResult data, string toMail);
     }
 }
