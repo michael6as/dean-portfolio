@@ -1,8 +1,11 @@
 <template>
-  <div class="app-holder-wrapper">
+  <div class="app-wrapper">
     <div class="logo-main">
       <h1> LOGO HERE</h1>
+      <div class="login-holder">
+        <input type="text" placeholder="Enter username" name="username" v-model="username"/>
     </div>
+    </div>        
     <div class="apps-nav">
       <div class="app-item" v-for="app in apps" v-on:click="current = app.panel">
         <img :src="app.logo" :title="app.name"/>
@@ -17,16 +20,20 @@
 <script>
 import HomePanel from './home-panel'
 import TransferPanel from './transfer-panel'
+import BalancePanel from './balance-panel'
 // import {mapState} from 'vuex'
 
 const apps =
   [
-    { 'name': 'home',
+    { 'actionName': 'home',
       'logo': require('@/assets/apps/all.svg'),
       'panel': 'HomePanel'},
-    { 'name': 'transfer',
+    { 'actionName': 'transfer',
       'logo': require('@/assets/apps/files.svg'),
-      'panel': 'TransferPanel'}
+      'panel': 'TransferPanel'},
+      { 'actionName': 'balance',
+      'logo': require('@/assets/apps/files.svg'),
+      'panel': 'BalancePanel'}
     // { 'name': 'withdraw',
     //   'logo': require('@/assets/apps/todo.svg'),
     //   'panel': WithdrawPanel},
@@ -54,15 +61,22 @@ export default {
 
 <style lang="scss" scoped>
 
-.app-holder-wrapper{
-  border: solid 1px #e6e9f2;
-  padding-top: 1%;
+.app-wrapper{
+  // border: solid 1px #e6e9f2;
+  // padding-top: 1%;
     flex:1;
     display: flex;
     flex-direction: column;
     background-color: #f5f7fa;
 
-  .apps-nav{
+    .logo-main{
+        // padding-left: 1%;
+        // width:100%;
+        // position: absolute;
+    }
+
+
+  .apps-nv{
     border: solid 1px #e6e9f2;
     margin-top: 6%;
     height: 100%;
@@ -70,19 +84,19 @@ export default {
     position: absolute;
   }
 
-  img{
+  .im{
     height: 60px;
     width: 60px;
   }
 
-  .comp-holder{
+  .cmp-holder{
     border: solid 1px #e6e9f2;
     margin-top: 6%;
     margin-left:auto;
     margin-right: auto;
     align-items: center;
   }
-    .logo{
+    .lgo{
         margin-top: 98px;
         margin-bottom: 74px;
         height:62px;
@@ -90,7 +104,7 @@ export default {
     }
 }
 
-.user-form{
+.usr-form{
     width:520px;
     display: flex;
     flex-direction: column;

@@ -31,10 +31,7 @@ html,body{
   display: flex;
 }
 
-.logo-main{
-  padding-left: 1%;
-  position: absolute;
-}
+
 input{
   height: 30px;
   border-radius: 5px;

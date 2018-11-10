@@ -2,23 +2,51 @@
 // import uuid from 'uuid'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import HomePanel from './components/home-panel'
-// import axios from 'axios'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
-// const localStorage = window.localStorage
-
-// function updateStorage (users) {
-//   localStorage.setItem('users', JSON.stringify(users))
-// }
+const myApi = axios.create({
+  baseURL: 'http://localhost:1995/',
+  withCredentials: true,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
+})
 
 export default new Vuex.Store({
   state: {
-    shownApp: { 'name': 'home',
-      'logo': require('@/assets/apps/all.svg'),
-      'panel': HomePanel}
+    username: 'Dean'
+    // shownApp: { 'name': 'home',
+    //   'logo': require('@/assets/apps/all.svg'),
+    //   'panel': HomePanel}
   },
   mutations: {
+    getUserInfo (ctrlname, username) {
+      let reqUri = 'api/' + ctrlname + '/' + username
+      myApi.get(reqUri).then(res => {
+        if (res.data.Succeed) {
+          console.log('success')
+        } else {
+          console.log(res.data)
+        }
+      }).catch(e => {
+        alert('Got error while fetching users from server ' + e.message)
+      })
+      return 8000
+    },
+    sendRequest (ctrlname, username, dataObj) {
+      let reqUri = 'api/' + ctrlname + '/' + username
+      myApi.get(reqUri, dataObj).then(res => {
+        if (res.data.Succeed) {
+          console.log('success')
+        } else {
+          console.log(res.data)
+        }
+      }).catch(e => {
+        alert('Got error while fetching users from server ' + e.message)
+      })
+    }
   }
 })

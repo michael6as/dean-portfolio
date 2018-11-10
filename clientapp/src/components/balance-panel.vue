@@ -1,17 +1,17 @@
 <template>
     <div class="balance-panel-wrapper">
         <div class="header-md">Balance</div>
-      <div class="header-md">Your current balance is: </div>
+      <div class="header-md">Your current balance is: {{this.userBalance}}</div>
     </div>
 </template>
 
 <script>
 
-export default {
-  computed: {
-  },
-  methods: {
-  }
+import {mapMutations,mapState} from 'vuex'
+import BaseActionComp from './base-panel-action'
+
+export default {    
+    props :[ 'userBalance' ]
 }
 </script>
 
