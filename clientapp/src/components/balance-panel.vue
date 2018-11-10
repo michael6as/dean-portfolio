@@ -1,8 +1,7 @@
 <template>
-    <div class="right-panel-wrapper">
-
-        <div class="header-md">Recent Users</div>
-        <div class="header-md">Recent Photos</div>
+    <div class="balance-panel-wrapper">
+        <div class="header-md">Balance</div>
+      <div class="header-md">Your current balance is: </div>
     </div>
 </template>
 

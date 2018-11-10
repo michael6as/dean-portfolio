@@ -1,11 +1,16 @@
 <template>
-  <div class="panel-holder-wrapper">
+  <div class="app-holder-wrapper">
+    <div class="logo-main">
+      <h1> LOGO HERE</h1>
+    </div>
     <div class="apps-nav">
       <div class="app-item" v-for="app in apps" v-on:click="current = app.panel">
         <img :src="app.logo" :title="app.name"/>
       </div>
     </div>
+    <div class="comp-holder">
       <component :is="current"></component>
+    </div>
     </div>
 </template>
 
@@ -49,13 +54,34 @@ export default {
 
 <style lang="scss" scoped>
 
-.panel-holder-wrapper{
+.app-holder-wrapper{
+  border: solid 1px #e6e9f2;
+  padding-top: 1%;
     flex:1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #f5f7fa;
 
+  .apps-nav{
+    border: solid 1px #e6e9f2;
+    margin-top: 6%;
+    height: 100%;
+    padding-left: 1%;
+    position: absolute;
+  }
+
+  img{
+    height: 60px;
+    width: 60px;
+  }
+
+  .comp-holder{
+    border: solid 1px #e6e9f2;
+    margin-top: 6%;
+    margin-left:auto;
+    margin-right: auto;
+    align-items: center;
+  }
     .logo{
         margin-top: 98px;
         margin-bottom: 74px;
