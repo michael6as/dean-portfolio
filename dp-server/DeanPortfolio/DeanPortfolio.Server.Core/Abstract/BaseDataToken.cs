@@ -2,8 +2,14 @@
 {
     public abstract class BaseDataToken
     {
-        public string MailToSend { get; set; }
-        public string Id { get; set; }
+        public string Name { get; set; }
+        public string ActionName { get; set; }
+
+        public BaseDataToken(string name, string actionName)
+        {
+            Name = name;
+            ActionName = actionName;
+        }
 
     }
 }

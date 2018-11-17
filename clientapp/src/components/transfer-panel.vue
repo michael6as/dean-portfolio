@@ -1,17 +1,39 @@
 <template>
-  <div class="sync-panel-wrapper">
-    <div class="header-md">Sync with external provider</div>
-  </div>
+  <div class="panel-wrapper">        
+        <div class="header-md">Balance Is:  {{ balance }}  </div>
+
+        <div class="tranfer-form">
+          <input type="text" placeholder="Enter value for Tranfer" name="amountToTransfer" v-model="amountToTransfer"/>
+          <input type="text" placeholder="Enter recipient name" name="recipient" v-model="recipient"/>
+          <div class="execute-btn" @click="execute">Transfer</div>                    
+        </div>        
+    </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import {mapMutations,mapState} from 'vuex'
 
 export default {
-  computed: {
-    ...mapState(['shownApp'])
+  props: ['user'],
+  data () {
+    return {            
+      ctrlName: 'finance',
+      actionName: 'transfer',
+      amountToTransfer: 0,
+      recipient:null
+    }
   },
-  methods: {
-  }
+  computed: {
+    ...mapState(['currentUser']),
+    balance: function() {
+        return this.getUserInfo(this.ctrlName)
+    }
+  },
+  methods:{
+      ...mapMutations(['getUserInfo','sendRequest']),
+      execute: function() {
+        sendRequest(ctrlName,{'actionName': actionName, 'recipient': recipient, 'amount': amountToTransfer})
+      }      
+    }      
 }
 </script>
 

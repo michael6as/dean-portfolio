@@ -1,4 +1,6 @@
-﻿using DeanPortfolio.Server.Core;
+﻿using System;
+using System.Collections.Generic;
+using DeanPortfolio.Server.Core;
 using System.Net;
 using System.Net.Mail;
 
@@ -8,9 +10,11 @@ namespace DeanPortfolio.Server.DAL
     {
         private SmtpClient _mailClient;
         private MailAddress _fromAddress;
+        private IDictionary<string, string> _userMails;
 
-        public MailHandler(string fromAddress, string fromName, string fromPassword)
+        public MailHandler(string fromAddress, string fromName, string fromPassword, Dictionary<string, string> userMails)
         {
+            _userMails = userMails;
             _fromAddress = new MailAddress(fromAddress, fromName);
             _mailClient = new SmtpClient
             {
@@ -25,13 +29,22 @@ namespace DeanPortfolio.Server.DAL
 
         public void SendMail(string message, ExecutionResult data, string toMail)
         {
-            var toAddress = new MailAddress(toMail, toMail.Substring(toMail.IndexOf("@")));
-            using (var mail = new MailMessage(_fromAddress, toAddress))
+            try
             {
-                mail.Subject = "Test";
-                mail.Body = message;
-                _mailClient.Send(mail);
+                toMail = _userMails[toMail];
+                var toAddress = new MailAddress(toMail, toMail.Substring(toMail.IndexOf("@")));
+                using (var mail = new MailMessage(_fromAddress, toAddress))
+                {
+                    mail.Subject = "Test";
+                    mail.Body = message;
+                    _mailClient.Send(mail);
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }            
         }
     }
 }

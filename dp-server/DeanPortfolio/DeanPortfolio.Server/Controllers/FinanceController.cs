@@ -14,15 +14,15 @@ namespace DeanPortfolio.Server.Controllers
         public FinanceController(IRequestRouter router)
         {
             _router = router;
-            _ctrlName = "Finance";
+            _ctrlName = "finance";
         }
 
         [HttpGet("{name}")]
-        public ActionResult<ExecutionResult> Get(string name, [FromBody]string jsonData)
+        public ActionResult<ExecutionResult> Get(string name)
         {
-            var route = _router.GetRoute(_ctrlName, Request.Method, out string actionName);
-            var dataToken = route.ValidateRequestQuery(actionName, jsonData, name);
-            var execRes = route.ExecuteRequest(actionName, dataToken);
+            var route = _router.GetRoute(_ctrlName);
+            var dataToken = route.ValidateRequestQuery(name);
+            var execRes = route.GetUserInfo(dataToken);
             // Return current account balance
             return execRes;
         }
@@ -30,9 +30,9 @@ namespace DeanPortfolio.Server.Controllers
         [HttpPost("{name}")]
         public ActionResult<ExecutionResult> Post(string name, [FromBody] string jsonData)
         {
-            var route = _router.GetRoute(_ctrlName, Request.Method, out string actionName);
-            var dataToken = route.ValidateRequestQuery(actionName, jsonData, name);
-            var execRes = route.ExecuteRequest(actionName, dataToken);
+            var route = _router.GetRoute(_ctrlName);
+            var dataToken = route.ValidateRequestQuery(name, jsonData);
+            var execRes = route.ExecuteRequest(dataToken);
             return execRes;
         }
     }
